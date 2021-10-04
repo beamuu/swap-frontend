@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { injected } from './wallet/connectors';
+import { Web3ReactProvider } from '@web3-react/core';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Web3 from 'web3';
+import Application from './pages/Application';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    function getLibrary(provider: any) {
+        return new Web3(provider);
+    }
+
+    return (
+        <Web3ReactProvider getLibrary={getLibrary}>
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/">
+                        <Application />
+                    </Route>
+                </Switch>
+            </BrowserRouter>
+        </Web3ReactProvider>
+    )
 }
 
 export default App;
