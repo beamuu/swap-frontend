@@ -3,26 +3,61 @@ import styled from "styled-components";
 interface IList {
     name: string;
     active: boolean;
+    onClick?: () => void;
 }
 
-const Container = styled.div`
+
+const Container: any = styled.div`
     width: 100%;
     height: 50px;
-    background-color: #000;
-    color: #fff;
+    padding: 0px 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin: 10px 0;
-    border-radius: 10px;
+    border-radius: 17px;
+    cursor: pointer;
+    font-weight: 500;
+
+    ${(props: any) => props.active ?
+
+        `
+        background-color: #000;
+        color: #fff;
+        &:hover {}
+        `
+        :
+
+        `
+        background-color: transparent;
+        color: #000;
+        &:hover {
+            background-color: rgba(100,100,100,0.1);
+            color: #000;
+        }
+        `
+
+    }
+
+    
 
 
 `
 
-export default function List({ name, active }: IList) {
+export default function List({ name, active, onClick }: IList) {
     return (
-        <Container>
-            { name }
+        <Container onClick={onClick} active={active} className="noselect">
+            <div>
+                {name}
+            </div>
+            {
+                active ?
+                    <div>
+                        {">"}
+                    </div> :
+                    null
+            }
+
         </Container>
     )
 }

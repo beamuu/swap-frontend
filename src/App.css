@@ -8,8 +8,12 @@ body {
 }
 h1,h2,h3,h4,h5,h6 {
   font-weight: 600;
+  margin: 0;
 }
 
+p {
+    margin: 0;
+}
 
 .full-width {
   width: 100% !important;
@@ -17,3 +21,31 @@ h1,h2,h3,h4,h5,h6 {
 .full-height {
   height: 100% !important;
 }
+input, select, textarea {
+    outline: none;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.swap-input {
+    background-color: transparent;
+    border: none;
+}
+select.swap {
+    background-color: transparent;
+    color: #000;
+    border: none;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+
+
