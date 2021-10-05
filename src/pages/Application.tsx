@@ -90,9 +90,13 @@ function HomePage() {
                         active={selectedIndex === 2}
                         onClick={() => setSelectedIndex(2)} />
                     <List
-                        name="Dev tools"
+                        name="Tokens"
                         active={selectedIndex === 3}
                         onClick={() => setSelectedIndex(3)} />
+                    <List
+                        name="Dev tools"
+                        active={selectedIndex === 4}
+                        onClick={() => setSelectedIndex(4)} />
                 </div>
 
                 <div className="col-10 p-5 ">

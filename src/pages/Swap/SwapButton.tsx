@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { SwapContext } from "../../contexts/Swap";
 
 const Button = styled.button`
     background: rgb(255,138,118);
@@ -13,7 +15,20 @@ const Button = styled.button`
 `
 
 export default function SwapButton() {
+
+    const { token1, token2, token1Amount, token2Amount } = useContext(SwapContext);
+
+    
+
+    const handleSwapEvent = () => {
+        alert(`You will swap your ${token1Amount} ${token1} with ${token2Amount} ${token2}`)
+    }
+    console.log(token1Amount);
     return (
-        <Button>Swap</Button>
+        <Button onClick={handleSwapEvent} disabled={(token1 && token2 && token1Amount && token2Amount) ? false : true}>{
+            (!token1Amount || !token1) ? "Enter an amount" :
+                (!token2) ? "Select token" : "Swap now"
+                    
+        }</Button>
     )
 }

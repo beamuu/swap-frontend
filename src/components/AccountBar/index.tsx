@@ -12,12 +12,16 @@ export default function AccountBar() {
         <AccountBarContainer>
             <div className="d-flex full-height align-items-center">
                 <Box><BsPersonCheckFill style={{ fontSize: "23px"}}/></Box>
-                <DynamicBox>{account}</DynamicBox>
+                <DynamicBox style={{ backgroundColor: "#fff" , color: "#3f3f3f"}}>{account}</DynamicBox>
             </div>
             <div className="d-flex full-height">
-                <Warning><FiAlertCircle style={{ fontSize: "23px"}}/></Warning>
-                <Inactive><GoX style={{ fontSize: "23px"}}/></Inactive>
-                <Active><BsCheckCircle style={{ fontSize: "23px"}}/></Active>
+                {
+                    chainId === 1 ? <Active><BsCheckCircle style={{ fontSize: "23px"}}/></Active> : 
+                    <Warning><span className="me-2">Wrong network</span><FiAlertCircle style={{ fontSize: "23px"}}/></Warning>
+                }
+                
+                {/* <Inactive><GoX style={{ fontSize: "23px"}}/></Inactive> */}
+                
                 <Box><AiFillGithub style={{ fontSize: "23px"}}/></Box>
             </div>
 
