@@ -1,7 +1,10 @@
 import { useWeb3React } from "@web3-react/core";
 import { Button } from "../../components/Button";
 import useToken from "../../hooks/useToken";
-import { token1Address, token2Address } from "../../utils/addresses";
+import { routerAddress, token1Address, token2Address } from "../../utils/addresses";
+import { toWei } from "../../utils/convert";
+
+declare let window: any;
 
 export default function DevTools() {
 
@@ -15,6 +18,36 @@ export default function DevTools() {
     async function getBalanceOfToken2(address: string | null | undefined) {
         return alert(await Token2.methods.balanceOf(address).call());
     }
+    async function approveToken1ForRouter() {
+        const encodedABI = Token1.methods.approve(routerAddress, toWei("100")).encodeABI();
+        const txParams = {
+            from: account,
+            to: token1Address,
+            data: encodedABI,
+            value: "0"
+        }
+        window.ethereum.request({
+            method: "eth_sendTransaction",
+            params: [txParams]
+        })
+    }
+    async function mintToken1() {
+        const encodedABI = Token1.methods.faucet(toWei("10")).encodeABI();
+        const txParams = {
+            from: account,
+            to: token1Address,
+            data: encodedABI,
+            value: "0"
+        }
+        window.ethereum.request({
+            method: "eth_sendTransaction",
+            params: [txParams]
+        })
+        .then((txhash: any) => {
+            alert("10 TK1 minted, txhash is " + txhash);
+        })
+        
+    }
 
     return (
         <div>
@@ -24,9 +57,9 @@ export default function DevTools() {
             <div className="mb-5">
                 <Button onClick={() => getBalanceOfToken1(account)}>balanceOf TK1</Button>
                 <Button onClick={() => getBalanceOfToken2(account)}>balanceOf TK2</Button>
-                <Button>allowance TK1 {"(owner => router)"}</Button>
+                <Button onClick={() => approveToken1ForRouter()}>allowance TK1 {"(owner => router)"}</Button>
                 <Button>allowance TK2 {"(owner => router)"}</Button>
-                <Button>mint TK1</Button>
+                <Button onClick={() => mintToken1()}>mint TK1</Button>
                 <Button>mint TK2</Button>
                 <Button>approve TK1 (router)</Button>
                 <Button>approve TK2 (router)</Button>

@@ -7,6 +7,7 @@ import Swap from "./Swap";
 import { useEffect, useState } from "react";
 import AccountBar from "../components/AccountBar";
 import DevTools from "./DevTools";
+import Account from "./Account";
 
 export default function Application() {
 
@@ -51,7 +52,10 @@ function HomePage() {
         else if (selectedIndex === 1) {
             setDisplayComponent(<Pool />);
         }
-        else if (selectedIndex === 3) {
+        else if (selectedIndex === 2) {
+            setDisplayComponent(<Account />);
+        }
+        else if (selectedIndex === 4) {
             setDisplayComponent(<DevTools />)
         }
     }, [selectedIndex])

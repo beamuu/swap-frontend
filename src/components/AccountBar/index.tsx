@@ -1,10 +1,11 @@
 import { useWeb3React } from "@web3-react/core";
 import AccountBarContainer from "./AccountBarContainer";
-import Inactive from "./Inactive";
+// import Inactive from "./Inactive";
 import { GoX, AiFillGithub, FiAlertCircle, BsCheckCircle, BsPersonCheckFill } from "react-icons/all";
 import Box, { DynamicBox } from "./Box";
 import Warning from "./Warning";
 import Active from "./Active";
+import { testChain } from "../../utils/chain";
 
 export default function AccountBar() {
     const { chainId, account } = useWeb3React();
@@ -16,7 +17,7 @@ export default function AccountBar() {
             </div>
             <div className="d-flex full-height">
                 {
-                    chainId === 1 ? <Active><BsCheckCircle style={{ fontSize: "23px"}}/></Active> : 
+                    chainId === testChain ? <Active><BsCheckCircle style={{ fontSize: "23px"}}/></Active> : 
                     <Warning><span className="me-2">Wrong network</span><FiAlertCircle style={{ fontSize: "23px"}}/></Warning>
                 }
                 
