@@ -1,6 +1,7 @@
 import { useWeb3React } from "@web3-react/core";
 import { Button } from "../../components/Button";
 import useToken from "../../hooks/useToken";
+import { useMetamaskTransaction } from "../../hooks/useTransaction";
 import { routerAddress, token1Address, token2Address } from "../../utils/addresses";
 import { toWei } from "../../utils/convert";
 
@@ -33,20 +34,13 @@ export default function DevTools() {
     }
     async function mintToken1() {
         const encodedABI = Token1.methods.faucet(toWei("10")).encodeABI();
-        const txParams = {
-            from: account,
-            to: token1Address,
-            data: encodedABI,
-            value: "0"
-        }
-        window.ethereum.request({
-            method: "eth_sendTransaction",
-            params: [txParams]
-        })
-        .then((txhash: any) => {
-            alert("10 TK1 minted, txhash is " + txhash);
-        })
-        
+        const txhash = await useMetamaskTransaction(account,token1Address,encodedABI,"");
+        return alert(`minted 100 TK1, transaction hash is ${txhash}`);
+    }
+    async function mintToken2() {
+        const encodedABI = Token1.methods.faucet(toWei("10")).encodeABI();
+        const txhash = await useMetamaskTransaction(account,token1Address,encodedABI,"");
+        return alert(`minted 100 TK1, transaction hash is ${txhash}`);
     }
 
     return (
@@ -60,7 +54,7 @@ export default function DevTools() {
                 <Button onClick={() => approveToken1ForRouter()}>allowance TK1 {"(owner => router)"}</Button>
                 <Button>allowance TK2 {"(owner => router)"}</Button>
                 <Button onClick={() => mintToken1()}>mint TK1</Button>
-                <Button>mint TK2</Button>
+                <Button onClick={() => mintToken2()}>mint TK2</Button>
                 <Button>approve TK1 (router)</Button>
                 <Button>approve TK2 (router)</Button>
             </div>
