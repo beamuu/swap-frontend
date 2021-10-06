@@ -1,6 +1,6 @@
 declare let window: any;
 
-export const useMetamaskTransaction = (from: string | null | undefined, to: string | null | undefined, data?: string, value?: string) => {
+export const metamaskTransaction = (from: string | null | undefined, to: string | null | undefined, data?: string, value?: string) => {
     const txParams = {
         from: from,
         to: to,

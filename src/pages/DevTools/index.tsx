@@ -1,7 +1,7 @@
 import { useWeb3React } from "@web3-react/core";
 import { Button } from "../../components/Button";
 import useToken from "../../hooks/useToken";
-import { useMetamaskTransaction } from "../../hooks/useTransaction";
+import { metamaskTransaction } from "../../hooks/useTransaction";
 import { routerAddress, token1Address, token2Address } from "../../utils/addresses";
 import { toWei } from "../../utils/convert";
 
@@ -34,12 +34,12 @@ export default function DevTools() {
     }
     async function mintToken1() {
         const encodedABI = Token1.methods.faucet(toWei("10")).encodeABI();
-        const txhash = await useMetamaskTransaction(account,token1Address,encodedABI,"");
+        const txhash = await metamaskTransaction(account,token1Address,encodedABI,"");
         return alert(`minted 100 TK1, transaction hash is ${txhash}`);
     }
     async function mintToken2() {
         const encodedABI = Token1.methods.faucet(toWei("10")).encodeABI();
-        const txhash = await useMetamaskTransaction(account,token1Address,encodedABI,"");
+        const txhash = await metamaskTransaction(account,token1Address,encodedABI,"");
         return alert(`minted 100 TK1, transaction hash is ${txhash}`);
     }
 
