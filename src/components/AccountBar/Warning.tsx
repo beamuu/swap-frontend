@@ -11,6 +11,7 @@ const Warning = styled.div`
     align-items: center;
     border-radius: 15px;
     margin: 0 5px;
+    cursor: pointer;
 `
 
 export default Warning;

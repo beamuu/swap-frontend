@@ -30,3 +30,23 @@ export const BlackButton = styled.div`
     align-items: center;
     cursor: pointer;
 `
+
+export const DefaultBlackButton = styled.div`
+    padding: 0 20px;
+    background-color: #000;
+    width: fit-content;
+    height: 40px;
+    text-align: center;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 300ms ease;
+    &:hover {
+        background-color: #3f3f3f;
+    }
+`

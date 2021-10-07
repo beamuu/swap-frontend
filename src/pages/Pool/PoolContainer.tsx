@@ -5,7 +5,9 @@ const PoolContainer = styled.div`
     height: 200px;
     background-color: #fff;
     border-radius: 20px;
-    margin: 10px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    margin-right: 7px;
     transition: 300ms ease;
     padding: 20px;
 `

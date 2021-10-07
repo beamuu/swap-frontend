@@ -1,6 +1,9 @@
+import { useWeb3React } from "@web3-react/core";
 import { useContext } from "react";
 import styled from "styled-components";
 import { SwapContext } from "../../contexts/Swap";
+import useRouter from "../../hooks/useRouter";
+import { Tokens } from "../../utils/addresses";
 
 const Button = styled.button`
     background: rgb(255,138,118);
@@ -17,11 +20,15 @@ const Button = styled.button`
 export default function SwapButton() {
 
     const { token1, token2, token1Amount, token2Amount } = useContext(SwapContext);
-
+    const { swapTokenToToken } = useRouter();
+    const { account } = useWeb3React();
     
 
     const handleSwapEvent = () => {
-        alert(`You will swap your ${token1Amount} ${token1} with ${token2Amount} ${token2}`)
+        if (window.confirm(`You will swap your ${token1Amount} ${token1} with ${token2Amount} ${token2},confirm transaction?`)) {
+            swapTokenToToken(token1Amount.toString(), (token2Amount*0.88).toString(), [Tokens[token1].address, Tokens[token2].address], account);
+        }
+        
     }
     console.log(token1Amount);
     return (

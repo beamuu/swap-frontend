@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import AccountBar from "../components/AccountBar";
 import DevTools from "./DevTools";
 import Account from "./Account";
+import Tokens from "./Tokens";
 
 export default function Application() {
 
@@ -52,8 +53,8 @@ function HomePage() {
         else if (selectedIndex === 1) {
             setDisplayComponent(<Pool />);
         }
-        else if (selectedIndex === 2) {
-            setDisplayComponent(<Account />);
+        else if (selectedIndex === 3) {
+            setDisplayComponent(<Tokens />);
         }
         else if (selectedIndex === 4) {
             setDisplayComponent(<DevTools />)
@@ -89,10 +90,6 @@ function HomePage() {
                         name="Pools"
                         active={selectedIndex === 1}
                         onClick={() => setSelectedIndex(1)} />
-                    <List
-                        name="Account"
-                        active={selectedIndex === 2}
-                        onClick={() => setSelectedIndex(2)} />
                     <List
                         name="Tokens"
                         active={selectedIndex === 3}

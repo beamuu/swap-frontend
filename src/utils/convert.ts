@@ -6,3 +6,6 @@ export const toWei = (_amount: string) => {
 export const fromWei = (_amount: string) => {
     return web3.utils.fromWei(_amount, "ether");
 }
+export const stringHexToNumber = (_hexString: string) => {
+    return parseInt(_hexString, 16);
+}

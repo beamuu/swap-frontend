@@ -7,8 +7,16 @@ import Warning from "./Warning";
 import Active from "./Active";
 import { testChain } from "../../utils/chain";
 
+declare let window: any;
+
 export default function AccountBar() {
     const { chainId, account } = useWeb3React();
+    const requestChangeNetwork = () => {
+        window.ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: "0x61" }]
+        })
+    }
     return (
         <AccountBarContainer>
             <div className="d-flex full-height align-items-center">
@@ -18,7 +26,7 @@ export default function AccountBar() {
             <div className="d-flex full-height">
                 {
                     chainId === testChain ? <Active><BsCheckCircle style={{ fontSize: "23px"}}/></Active> : 
-                    <Warning><span className="me-2">Wrong network</span><FiAlertCircle style={{ fontSize: "23px"}}/></Warning>
+                    <Warning onClick={requestChangeNetwork}><span className="me-2">Wrong network</span><FiAlertCircle style={{ fontSize: "23px"}}/></Warning>
                 }
                 
                 {/* <Inactive><GoX style={{ fontSize: "23px"}}/></Inactive> */}

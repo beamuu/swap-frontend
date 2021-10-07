@@ -1,9 +1,9 @@
 import './App.css';
-import { injected } from './wallet/connectors';
 import { Web3ReactProvider } from '@web3-react/core';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Web3 from 'web3';
 import Application from './pages/Application';
+import PoolPage from './pages/PoolPage';
 
 function App() {
 
@@ -15,8 +15,11 @@ function App() {
         <Web3ReactProvider getLibrary={getLibrary}>
             <BrowserRouter>
                 <Switch>
-                    <Route exact path="/">
+                    <Route exact path="/app">
                         <Application />
+                    </Route>
+                    <Route exact path="/pool/:pair">
+                        <PoolPage />
                     </Route>
                 </Switch>
             </BrowserRouter>

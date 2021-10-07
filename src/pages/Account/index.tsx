@@ -8,7 +8,7 @@ declare let window: any;
 
 export default function Account() {
     const [balances, setBalances] = useState<string | null>(null)
-    const Token1 = useToken(token1Address);
+    const { Token: Token1 } = useToken(token1Address);
     const { account } = useWeb3React();
     console.log(window.ethereum)
     const getBalance = async () => {

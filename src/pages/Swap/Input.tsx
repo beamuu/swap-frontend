@@ -11,17 +11,17 @@ export default function Input() {
         return setToken1Amount(e.target.value);
     }
     return (
-        <div className="d-flex align-items-center" style={{ width: "100%", height: "70px", backgroundColor: "#ebedf0", margin: "20px 0", padding: "10px", borderRadius: "14px", }}>
+        <div className="d-flex align-items-center" style={{ width: "100%", minHeight: "70px", backgroundColor: "#ebedf0", margin: "20px 0", padding: "10px", borderRadius: "14px", }}>
             <div className="full-width">
-                <h6>From</h6>
+                <h6 className="mb-3">From</h6>
                 <div className="row m-0 p-0">
                     <div className="col-9 p-0">
                         <input type="number" className="swap-input full-width" placeholder="0.0" onChange={handleAmountChange}/>
                     </div>
                     <div className="col-3 p-0">
                         <select className="full-width swap" onChange={handleSelect}>
-                            <option disabled={token2 ? ("TK1" === token2) : false} value="TK1">Token1</option>
-                            <option disabled={token2 ? ("TK2" === token2) : false} value="TK2">Token2</option>
+                            <option disabled={token2 ? ("TK1" === token2) : false} value="TK1">TK1</option>
+                            <option disabled={token2 ? ("TK2" === token2) : false} value="TK2">TK2</option>
                         </select>
                     </div>
                 </div>
