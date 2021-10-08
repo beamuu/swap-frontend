@@ -17,7 +17,7 @@ export const Button = styled.button`
 `
 
 export const BlackButton = styled.div`
-    background-color: #000;
+    background-color: #355dde;
     width: 100%;
     height: 40px;
     text-align: center;
@@ -33,7 +33,7 @@ export const BlackButton = styled.div`
 
 export const DefaultBlackButton = styled.div`
     padding: 0 20px;
-    background-color: #000;
+    background-color: #355dde;
     width: fit-content;
     height: 40px;
     text-align: center;
@@ -47,7 +47,7 @@ export const DefaultBlackButton = styled.div`
     cursor: pointer;
     transition: 300ms ease;
     &:hover {
-        background-color: #3f3f3f;
+        background-color: #4500c4;
     }
 `
 

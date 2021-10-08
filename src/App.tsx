@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Web3 from 'web3';
 import Application from './pages/Application';
 import PoolPage from './pages/PoolPage';
+import Main from './pages/Main';
 
 function App() {
 
@@ -20,6 +21,9 @@ function App() {
                     </Route>
                     <Route exact path="/pool/:pair">
                         <PoolPage />
+                    </Route>
+                    <Route exact path="/">
+                        <Main />
                     </Route>
                 </Switch>
             </BrowserRouter>

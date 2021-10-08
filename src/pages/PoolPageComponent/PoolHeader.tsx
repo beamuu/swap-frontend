@@ -7,19 +7,25 @@ interface IPoolHeader {
 }
 
 const PoolHeaderContainer = styled.div`
+    min-height: 300px;
     width: 100%;
     color: #fff;
-    padding: 20px;
-    border-radius: 20px;
-    background: rgb(255,138,118);
-    background: linear-gradient(151deg, rgba(255,138,118,1) 0%, rgba(255,0,134,1) 100%);
+    padding: 50px;
+    border-radius: 20px 20px 0 0;
+    background: rgb(0,95,255);
+background: linear-gradient(180deg, rgba(0,95,255,1) 48%, rgba(2,73,129,1) 100%);
+    display: flex;
+    justify-content: end;
+    align-items: end;
 `
 
 export default function PoolHeader({ name1, name2, address }: IPoolHeader) {
     return (
         <PoolHeaderContainer>
-            <h1 className="mb-3">{name1}<MdSwapHoriz />{name2}</h1>
-            <p>at: {address}</p>
+            <div className="text-end">
+                <h1 className="mb-3">{name1}<MdSwapHoriz />{name2}</h1>
+                <p>at: {address}</p>
+            </div>
         </PoolHeaderContainer>
     )
 }

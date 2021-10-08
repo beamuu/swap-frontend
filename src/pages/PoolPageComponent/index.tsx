@@ -75,7 +75,9 @@ export default function PoolPageComponent() {
     }
 
     const handleAddLiquidity = () => {
-        console.log(
+        approveToken1(routerAddress, amount0);
+        approveToken2(routerAddress, amount1);
+        addLiquidity(
             tk0,
             tk1,
             amount0,
@@ -83,21 +85,8 @@ export default function PoolPageComponent() {
             min0,
             min1,
             account
-        )
-        window.ethereum.on("message", () => console.log("notify!!"));
-        approveToken1(routerAddress, amount0).then((txhash: string) => {
-            approveToken2(routerAddress, amount1).then((txhash: string) => {
-                addLiquidity(
-                    tk0,
-                    tk1,
-                    amount0,
-                    amount1,
-                    min0,
-                    min1,
-                    account
-                )
-            });
-        });
+        );
+
 
 
 
@@ -130,97 +119,98 @@ export default function PoolPageComponent() {
                     backgroundColor: "rgba(255,255,255,0.70)",
                     borderRadius: "20px",
                     minHeight: "600px",
-                    padding: "20px",
                 }}
             >
                 <PoolHeader name1={param1} name2={param2} address={pairAddress} />
                 {/* <h3>Pool {token1}-{token2}</h3>
             <p>pool address: {pairAddress}</p> */}
-                <h5 className="mt-5">Reserves</h5>
-                <div className="row m-0 p-0">
-                    <Reserve
-                        className="col-lg mx-2"
-                        name={TokenOfAddress[tk0].name}
-                        value={reserve0 ? fromWei(reserve0) : "Getting number..."}
-                        symbol={TokenOfAddress[tk0].symbol}
-                        ratio={parseFloat(reserve0) / (parseFloat(reserve0) + parseFloat(reserve1))}
-                        theme={1}
-                    // ratio={0.4}
-                    />
+                <div style={{ padding: "20px"}}>
+                    <h5 className="mt-5">Reserves</h5>
+                    <div className="row m-0 p-0">
+                        <Reserve
+                            className="col-lg mx-2"
+                            name={TokenOfAddress[tk0].name}
+                            value={reserve0 ? fromWei(reserve0) : "Getting number..."}
+                            symbol={TokenOfAddress[tk0].symbol}
+                            ratio={parseFloat(reserve0) / (parseFloat(reserve0) + parseFloat(reserve1))}
+                            theme={1}
+                        // ratio={0.4}
+                        />
 
-                    <Reserve
-                        className="col-lg mx-2"
-                        name={TokenOfAddress[tk1].name}
-                        value={reserve1 ? fromWei(reserve1) : "Getting number..."}
-                        symbol={TokenOfAddress[tk1].symbol}
-                        ratio={parseFloat(reserve1) / (parseFloat(reserve0) + parseFloat(reserve1))}
-                        theme={2}
-                    // ratio={0.6}
-                    />
+                        <Reserve
+                            className="col-lg mx-2"
+                            name={TokenOfAddress[tk1].name}
+                            value={reserve1 ? fromWei(reserve1) : "Getting number..."}
+                            symbol={TokenOfAddress[tk1].symbol}
+                            ratio={parseFloat(reserve1) / (parseFloat(reserve0) + parseFloat(reserve1))}
+                            theme={2}
+                        // ratio={0.6}
+                        />
 
-                </div>
+                    </div>
 
-                <div className="my-3">
-                    <div className="row">
-                        <div className="col-lg mx-2 p-3" style={{ backgroundColor: "#fff", borderRadius: "20px", minHeight: "200px" }}>
-                            <div className="p-3">
-                                <h3 className="mb-4">Liquidity</h3>
-                                <div className="row">
-                                    <div className="col-4">
-                                        <b>{TokenOfAddress[tk0].name}</b>
+                    <div className="my-3">
+                        <div className="row m-0">
+                            <div className="col-lg mx-2 p-3" style={{ backgroundColor: "#fff", borderRadius: "20px", minHeight: "200px" }}>
+                                <div className="p-3">
+                                    <h3 className="mb-4">Liquidity</h3>
+                                    <div className="row">
+                                        <div className="col-4">
+                                            <b>{TokenOfAddress[tk0].name}</b>
+                                        </div>
+                                        <div className="col-8">
+                                            <input className="mx-2" onChange={handleAmount0} /><span>{TokenOfAddress[tk0].symbol}</span><br />
+                                        </div>
                                     </div>
-                                    <div className="col-8">
-                                        <input className="mx-2" onChange={handleAmount0} /><span>{TokenOfAddress[tk0].symbol}</span><br />
+                                    <div className="row">
+                                        <div className="col-4">
+                                            <b>{TokenOfAddress[tk1].name}</b>
+                                        </div>
+                                        <div className="col-8">
+                                            <input className="mx-2" onChange={handleAmount1} /><span>{TokenOfAddress[tk1].symbol}</span><br />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-4">
-                                        <b>{TokenOfAddress[tk1].name}</b>
+                                    <div className="row">
+                                        <div className="col-4">
+                                            <b>Minimum {TokenOfAddress[tk0].name}</b>
+                                        </div>
+                                        <div className="col-8">
+                                            <input className="mx-2" onChange={handleMin0} /><span>{TokenOfAddress[tk0].symbol}</span><br />
+                                        </div>
                                     </div>
-                                    <div className="col-8">
-                                        <input className="mx-2" onChange={handleAmount1} /><span>{TokenOfAddress[tk1].symbol}</span><br />
+                                    <div className="row">
+                                        <div className="col-4">
+                                            <b>Minimum {TokenOfAddress[tk1].name}</b>
+                                        </div>
+                                        <div className="col-8 ">
+                                            <input className="mx-2" onChange={handleMin1} /><span>{TokenOfAddress[tk1].symbol}</span><br />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-4">
-                                        <b>Minimum {TokenOfAddress[tk0].name}</b>
+                                    <div className="mt-4">
+                                        <DefaultBlackButton
+                                            className="mt-3"
+                                            onClick={handleAddLiquidity}
+                                        >Add Liquidity</DefaultBlackButton>
                                     </div>
-                                    <div className="col-8">
-                                        <input className="mx-2" onChange={handleMin0} /><span>{TokenOfAddress[tk0].symbol}</span><br />
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-4">
-                                        <b>Minimum {TokenOfAddress[tk1].name}</b>
-                                    </div>
-                                    <div className="col-8 ">
-                                        <input className="mx-2" onChange={handleMin1} /><span>{TokenOfAddress[tk1].symbol}</span><br />
-                                    </div>
-                                </div>
-                                <div className="mt-4">
-                                    <DefaultBlackButton
-                                        className="mt-3"
-                                        onClick={handleAddLiquidity}
-                                    >Add Liquidity</DefaultBlackButton>
-                                </div>
 
+                                </div>
+                            </div>
+                            <div className="col-lg mx-2 p-3" style={{ backgroundColor: "#fff", borderRadius: "20px", minHeight: "200px" }}>
+                                <Balance
+                                    address0={tk0}
+                                    address1={tk1}
+                                    symbol0={TokenOfAddress[tk0].symbol}
+                                    symbol1={TokenOfAddress[tk1].symbol}
+                                />
                             </div>
                         </div>
-                        <div className="col-lg mx-2 p-3" style={{ backgroundColor: "#fff", borderRadius: "20px", minHeight: "200px" }}>
-                            <Balance
-                                address0={tk0}
-                                address1={tk1}
-                                symbol0={TokenOfAddress[tk0].symbol}
-                                symbol1={TokenOfAddress[tk1].symbol}
-                            />
-                        </div>
+                        {/* <Button>Add liquidity</Button> */}
+
                     </div>
-                    {/* <Button>Add liquidity</Button> */}
+
+
 
                 </div>
-
-
-
             </div>
         </>
     )

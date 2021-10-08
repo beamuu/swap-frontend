@@ -22,7 +22,7 @@ const Container: any = styled.div`
     ${(props: any) => props.active ?
 
         `
-        background-color: #000;
+        background-color: #355dde;
         color: #fff;
         &:hover {}
         `

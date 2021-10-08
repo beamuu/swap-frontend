@@ -29,7 +29,7 @@ export default function TokenBox({ address }: ITokenBox ) {
                     
                 </div>
             </div>
-            <p className="mt-3"><b>balance:</b> <span style={{ color: "#ed2870"}}>{ parseFloat(balance).toFixed(4) } {TokenOfAddress[address].symbol}</span></p>
+            <p className="mt-3"><b>balance:</b> <span style={{ color: "rgb(0,95,255)"}}>{ parseFloat(balance).toFixed(4) } {TokenOfAddress[address].symbol}</span></p>
         </TokenBoxContainer>
     )
 }
