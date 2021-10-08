@@ -54,7 +54,7 @@ export default function useRouter() {
         path: string[],
         to: string | null | undefined,
     ) => {
-        const data = Router.methods.swapExactTokensForTokens(
+        const data = Router.methods.swapTokensForExactTokens(
             toWei(amountIn),
             toWei(amountOutMin),
             path,

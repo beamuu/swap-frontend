@@ -26,7 +26,7 @@ export default function SwapButton() {
 
     const handleSwapEvent = () => {
         if (window.confirm(`You will swap your ${token1Amount} ${token1} with ${token2Amount} ${token2},confirm transaction?`)) {
-            swapTokenToToken(token1Amount.toString(), (token2Amount*0.88).toString(), [Tokens[token1].address, Tokens[token2].address], account);
+            swapTokenToToken(token1Amount.toString(), (token2Amount*0.95).toString(), [Tokens[token1].address, Tokens[token2].address], account);
         }
         
     }

@@ -11,9 +11,9 @@ export default function useToken(tokenAddress: string) {
     const Token = new web3.eth.Contract(abi as AbiItem[], tokenAddress);
     const { account } = useWeb3React();
 
-    const approve = (targetAddress: string, amount: string) => {
+    const approve = async (targetAddress: string, amount: string) => {
         const data = Token.methods.approve(targetAddress, toWei(amount)).encodeABI();
-        metamaskTransaction(account, tokenAddress, data);
+        return await metamaskTransaction(account, tokenAddress, data);
     }
     const balanceOf = async () => {
         return await Token.methods.balanceOf(account).call();

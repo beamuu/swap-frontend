@@ -6,7 +6,7 @@ import useFactory from "../../hooks/useFactory";
 import usePair from "../../hooks/usePair";
 import useRouter from "../../hooks/useRouter";
 import useToken from "../../hooks/useToken";
-import { routerAddress, Tokens } from "../../utils/addresses";
+import { routerAddress, token1Address, token2Address, Tokens } from "../../utils/addresses";
 import { fromWei } from "../../utils/convert";
 import Balance from "./Balance";
 import PoolHeader from "./PoolHeader";
@@ -17,21 +17,29 @@ interface IParams {
     pair: string;
 }
 
+declare let window: any;
+
 export default function PoolPageComponent() {
+    
+    const { pair }: IParams = useParams();
+    const [param1, param2] = pair.split("-");
 
     const Factory = useFactory();
     const { account } = useWeb3React();
-    const { pair }: IParams = useParams();
-    const [token1, token2] = pair.split("-");
-    const { pairAddress, reserve0, reserve1 } = usePair(token1, token2);
+    
+    
+    const { pairAddress, reserve0, reserve1, tk0, tk1 } = usePair(param1, param2);
     const { addLiquidity } = useRouter();
-    const { approve: approveToken1 } = useToken(Tokens[token1].address);
-    const { approve: approveToken2 } = useToken(Tokens[token2].address);
+    const { approve: approveToken1 } = useToken(tk0);
+    const { approve: approveToken2 } = useToken(tk1);
     const [amount0, setAmount0] = useState("");
     const [amount1, setAmount1] = useState("");
     const [min0, setMin0] = useState("");
     const [min1, setMin1] = useState("");
     const history = useHistory();
+
+
+    
 
     // for init pairAddress
 
@@ -69,17 +77,33 @@ export default function PoolPageComponent() {
     }
 
     const handleAddLiquidity = () => {
-        approveToken1(routerAddress, amount0);
-        approveToken2(routerAddress, amount1);
-        addLiquidity(
-            Tokens[token1].address,
-            Tokens[token2].address,
+        console.log(
+            tk0,
+            tk1,
             amount0,
             amount1,
             min0,
             min1,
             account
         )
+        window.ethereum.on("message", () => console.log("notify!!"));
+        approveToken1(routerAddress, amount0).then((txhash: string) => {
+            approveToken2(routerAddress, amount1).then((txhash: string) => {
+                addLiquidity(
+                    tk0,
+                    tk1,
+                    amount0,
+                    amount1,
+                    min0,
+                    min1,
+                    account
+                )
+            });
+        });
+
+
+
+
     }
 
 
@@ -93,6 +117,7 @@ export default function PoolPageComponent() {
             <h4>No pool available</h4>
         )
     }
+    console.log(tk0, tk1);
     return (
         <>
             <DefaultBlackButton className="mt-5" onClick={() => history.push("/app")}>{"<"} Back to app</DefaultBlackButton>
@@ -104,7 +129,7 @@ export default function PoolPageComponent() {
                     padding: "20px",
                 }}
             >
-                <PoolHeader name={`${token1}-${token2}`} address={pairAddress} />
+                <PoolHeader name={`${param1}-${param2}`} address={pairAddress} />
                 {/* <h3>Pool {token1}-{token2}</h3>
             <p>pool address: {pairAddress}</p> */}
                 <h5 className="mt-5">Reserves</h5>

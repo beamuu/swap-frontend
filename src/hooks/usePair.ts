@@ -15,11 +15,22 @@ export default function usePair(token1: string, token2: string) {
     const [reserve0, setReserve0] = useState("");
     const [reserve1, setReserve1] = useState("");
     const [lpToken, setLp] = useState("");
+    const [tk0, setTk0] = useState<string>("");
+    const [tk1, setTk1] = useState<string>("");
     const Pair = new web3.eth.Contract(pairData.abi as AbiItem[], pairAddress);
 
+    const getToken0 = async () => {
+        const t0 = await Pair.methods.token0().call();
+        setTk0(t0);
+    }
+    const getToken1 = async () => {
+        const t1 = await Pair.methods.token1().call();
+        setTk1(t1);
+    }
 
     const getReserves = async () => {
         const resv: any = await Pair.methods.getReserves().call();
+        console.log(resv);
         const { _reserve0, _reserve1 } = resv;
         setReserve0(_reserve0);
         setReserve1(_reserve1);
@@ -28,6 +39,7 @@ export default function usePair(token1: string, token2: string) {
         const _lp: any = await Pair.methods.balanceOf(account).call();
         setLp(_lp);
     }
+    
 
     useEffect(() => {
         const init = async () => {
@@ -49,6 +61,8 @@ export default function usePair(token1: string, token2: string) {
         if (pairAddress) {
             getReserves();
             getLpToken();
+            getToken0();
+            getToken1();
         }
     }, [pairAddress]);
 
@@ -57,7 +71,9 @@ export default function usePair(token1: string, token2: string) {
         pairAddress,
         reserve0,
         reserve1,
-        lpToken
+        lpToken,
+        tk0,
+        tk1
     };
 }
 

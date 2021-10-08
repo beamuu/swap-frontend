@@ -13,7 +13,7 @@ import Tokens from "./Tokens";
 export default function Application() {
 
     const { activate, active, account } = useWeb3React();
-
+    const g = useWeb3React();
 
     async function connect() {
         try {
