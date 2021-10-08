@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { SwapContext } from "../../contexts/Swap";
 
 export default function Output() {
@@ -11,6 +11,9 @@ export default function Output() {
     const handleAmountChange = (e: any) => {
         return setToken2Amount(e.target.value);
     }
+    useEffect(() => {
+        const reset: any = document.getElementById("reset")?.click();
+    }, [token2])
     return (
         <div className="d-flex align-items-center" style={{ width: "100%", minHeight: "70px", backgroundColor: "#ebedf0", margin: "20px 0", padding: "10px", borderRadius: "14px", }}>
             <div className="full-width">
@@ -20,8 +23,8 @@ export default function Output() {
                         <input type="number" className="swap-input full-width" placeholder="0.0" value={output} />
                     </div>
                     <div className="col-3 p-0">
-                        <select className="full-width swap" onChange={handleSelect}>
-                            <option disabled={token2 ? true : false} value="TK1">Choose</option>
+                        <select className="full-width swap" onChange={handleSelect} id="select-output">
+                            <option disabled={token2 ? true : false} value="" id="reset">Choose</option>
                             <option disabled={token1 ? ("TK1" === token1) : false} value="TK1">TK1</option>
                             <option disabled={token1 ? ("TK2" === token1) : false} value="TK2">TK2</option>
                         </select>

@@ -2,11 +2,12 @@ import { useWeb3React } from "@web3-react/core";
 import { useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { DefaultBlackButton } from "../../components/Button";
+import { LoadingTop } from "../../components/Loading";
 import useFactory from "../../hooks/useFactory";
 import usePair from "../../hooks/usePair";
 import useRouter from "../../hooks/useRouter";
 import useToken from "../../hooks/useToken";
-import { routerAddress, token1Address, token2Address, Tokens } from "../../utils/addresses";
+import { routerAddress, token1Address, token2Address, TokenOfAddress, Tokens } from "../../utils/addresses";
 import { fromWei } from "../../utils/convert";
 import Balance from "./Balance";
 import PoolHeader from "./PoolHeader";
@@ -20,14 +21,11 @@ interface IParams {
 declare let window: any;
 
 export default function PoolPageComponent() {
-    
+
     const { pair }: IParams = useParams();
     const [param1, param2] = pair.split("-");
-
     const Factory = useFactory();
     const { account } = useWeb3React();
-    
-    
     const { pairAddress, reserve0, reserve1, tk0, tk1 } = usePair(param1, param2);
     const { addLiquidity } = useRouter();
     const { approve: approveToken1 } = useToken(tk0);
@@ -39,7 +37,7 @@ export default function PoolPageComponent() {
     const history = useHistory();
 
 
-    
+
 
     // for init pairAddress
 
@@ -117,7 +115,13 @@ export default function PoolPageComponent() {
             <h4>No pool available</h4>
         )
     }
-    console.log(tk0, tk1);
+    if (!tk0 || !tk1) {
+        return (
+            <LoadingTop />
+        )
+    }
+    console.log("tk0 is:", tk0);
+    console.log("tk1 is:", tk1);
     return (
         <>
             <DefaultBlackButton className="mt-5" onClick={() => history.push("/app")}>{"<"} Back to app</DefaultBlackButton>
@@ -129,16 +133,16 @@ export default function PoolPageComponent() {
                     padding: "20px",
                 }}
             >
-                <PoolHeader name={`${param1}-${param2}`} address={pairAddress} />
+                <PoolHeader name1={param1} name2={param2} address={pairAddress} />
                 {/* <h3>Pool {token1}-{token2}</h3>
             <p>pool address: {pairAddress}</p> */}
                 <h5 className="mt-5">Reserves</h5>
                 <div className="row m-0 p-0">
                     <Reserve
                         className="col-lg mx-2"
-                        name={Tokens[token1].name}
+                        name={TokenOfAddress[tk0].name}
                         value={reserve0 ? fromWei(reserve0) : "Getting number..."}
-                        symbol={token1}
+                        symbol={TokenOfAddress[tk0].symbol}
                         ratio={parseFloat(reserve0) / (parseFloat(reserve0) + parseFloat(reserve1))}
                         theme={1}
                     // ratio={0.4}
@@ -146,9 +150,9 @@ export default function PoolPageComponent() {
 
                     <Reserve
                         className="col-lg mx-2"
-                        name={Tokens[token2].name}
+                        name={TokenOfAddress[tk1].name}
                         value={reserve1 ? fromWei(reserve1) : "Getting number..."}
-                        symbol={token2}
+                        symbol={TokenOfAddress[tk1].symbol}
                         ratio={parseFloat(reserve1) / (parseFloat(reserve0) + parseFloat(reserve1))}
                         theme={2}
                     // ratio={0.6}
@@ -162,38 +166,38 @@ export default function PoolPageComponent() {
                             <div className="p-3">
                                 <h3 className="mb-4">Liquidity</h3>
                                 <div className="row">
-                                    <div className="col">
-                                        <b>{Tokens[token1].name}</b>
+                                    <div className="col-4">
+                                        <b>{TokenOfAddress[tk0].name}</b>
                                     </div>
-                                    <div className="col">
-                                        <input className="mx-2" onChange={handleAmount0} /><span>{token1}</span><br />
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col">
-                                        <b>{Tokens[token2].name}</b>
-                                    </div>
-                                    <div className="col">
-                                        <input className="mx-2" onChange={handleAmount1} /><span>{token2}</span><br />
+                                    <div className="col-8">
+                                        <input className="mx-2" onChange={handleAmount0} /><span>{TokenOfAddress[tk0].symbol}</span><br />
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col">
-                                        <b>Minimum {Tokens[token1].name}</b>
+                                    <div className="col-4">
+                                        <b>{TokenOfAddress[tk1].name}</b>
                                     </div>
-                                    <div className="col">
-                                        <input className="mx-2" onChange={handleMin0} /><span>{token1}</span><br />
+                                    <div className="col-8">
+                                        <input className="mx-2" onChange={handleAmount1} /><span>{TokenOfAddress[tk1].symbol}</span><br />
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col">
-                                        <b>Minimum {Tokens[token2].name}</b>
+                                    <div className="col-4">
+                                        <b>Minimum {TokenOfAddress[tk0].name}</b>
                                     </div>
-                                    <div className="col">
-                                        <input className="mx-2" onChange={handleMin1} /><span>{token2}</span><br />
+                                    <div className="col-8">
+                                        <input className="mx-2" onChange={handleMin0} /><span>{TokenOfAddress[tk0].symbol}</span><br />
                                     </div>
                                 </div>
-                                <div className="d-flex justify-content-center mt-3">
+                                <div className="row">
+                                    <div className="col-4">
+                                        <b>Minimum {TokenOfAddress[tk1].name}</b>
+                                    </div>
+                                    <div className="col-8 ">
+                                        <input className="mx-2" onChange={handleMin1} /><span>{TokenOfAddress[tk1].symbol}</span><br />
+                                    </div>
+                                </div>
+                                <div className="mt-4">
                                     <DefaultBlackButton
                                         className="mt-3"
                                         onClick={handleAddLiquidity}
@@ -204,10 +208,10 @@ export default function PoolPageComponent() {
                         </div>
                         <div className="col-lg mx-2 p-3" style={{ backgroundColor: "#fff", borderRadius: "20px", minHeight: "200px" }}>
                             <Balance
-                                address0={Tokens[token1].address}
-                                address1={Tokens[token2].address}
-                                symbol0={token1}
-                                symbol1={token2}
+                                address0={tk0}
+                                address1={tk1}
+                                symbol0={TokenOfAddress[tk0].symbol}
+                                symbol1={TokenOfAddress[tk1].symbol}
                             />
                         </div>
                     </div>

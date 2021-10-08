@@ -59,6 +59,7 @@ export function SwapProvider({ children }: { children: any }) {
             setCalculated(true)
         }
         else {
+            setOutput("");
             setCalculated(false);
         }
     }, [token1, token1Amount, token2])

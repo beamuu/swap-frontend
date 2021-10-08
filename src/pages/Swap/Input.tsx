@@ -3,9 +3,10 @@ import { SwapContext } from "../../contexts/Swap";
 
 export default function Input() {
 
-    const { token1, token2, setToken1, setToken1Amount } = useContext(SwapContext);
+    const { token1, token2, setToken1, setToken2, setToken1Amount } = useContext(SwapContext);
     const handleSelect = (e: any) => {
-        return setToken1(e.target.value);
+        setToken2("");
+        setToken1(e.target.value);
     }
     const handleAmountChange = (e: any) => {
         return setToken1Amount(e.target.value);
@@ -20,8 +21,8 @@ export default function Input() {
                     </div>
                     <div className="col-3 p-0">
                         <select className="full-width swap" onChange={handleSelect}>
-                            <option disabled={token2 ? ("TK1" === token2) : false} value="TK1">TK1</option>
-                            <option disabled={token2 ? ("TK2" === token2) : false} value="TK2">TK2</option>
+                            <option value="TK1">TK1</option>
+                            <option value="TK2">TK2</option>
                         </select>
                     </div>
                 </div>

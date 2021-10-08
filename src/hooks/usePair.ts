@@ -30,7 +30,6 @@ export default function usePair(token1: string, token2: string) {
 
     const getReserves = async () => {
         const resv: any = await Pair.methods.getReserves().call();
-        console.log(resv);
         const { _reserve0, _reserve1 } = resv;
         setReserve0(_reserve0);
         setReserve1(_reserve1);
@@ -59,10 +58,10 @@ export default function usePair(token1: string, token2: string) {
 
     useEffect(() => {     
         if (pairAddress) {
-            getReserves();
-            getLpToken();
             getToken0();
             getToken1();
+            getReserves();
+            getLpToken();          
         }
     }, [pairAddress]);
 
