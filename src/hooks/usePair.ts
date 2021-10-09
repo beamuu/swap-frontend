@@ -3,15 +3,16 @@ import { web3 } from "../wallet/providers/web3";
 import pairData from "../utils/abi/PancakePair.json";
 import { useEffect, useState } from 'react';
 import useFactory from './useFactory';
-import { stringHexToNumber } from '../utils/convert';
+import { stringHexToNumber, toWei } from '../utils/convert';
 import { Tokens } from '../utils/addresses';
 import { useWeb3React } from '@web3-react/core';
+import { metamaskTransaction } from './useTransaction';
 
 export default function usePair(token1: string, token2: string) {
 
     const { account } = useWeb3React();
     const Factory = useFactory();
-    const [pairAddress, setPairAddress] = useState<string | undefined>("");
+    const [pairAddress, setPairAddress] = useState<string>("");
     const [reserve0, setReserve0] = useState("");
     const [reserve1, setReserve1] = useState("");
     const [lpToken, setLp] = useState("");
@@ -38,6 +39,10 @@ export default function usePair(token1: string, token2: string) {
         const _lp: any = await Pair.methods.balanceOf(account).call();
         setLp(_lp);
     }
+    const approve = async (targetAddress: string, amount: string) => {
+        const data = Pair.methods.approve(targetAddress, toWei(amount)).encodeABI();
+        return await metamaskTransaction(account, pairAddress, data);
+    }
     
 
     useEffect(() => {
@@ -45,7 +50,7 @@ export default function usePair(token1: string, token2: string) {
             if (!pairAddress) {
                 const paddr = await Factory.methods.getPair(Tokens[token1].address,Tokens[token2].address).call();
                 if (stringHexToNumber(paddr) === 0) {
-                    setPairAddress(undefined);
+                    setPairAddress("");
                 }
                 else {
                     setPairAddress(paddr);
@@ -72,7 +77,8 @@ export default function usePair(token1: string, token2: string) {
         reserve1,
         lpToken,
         tk0,
-        tk1
+        tk1,
+        approve
     };
 }
 

@@ -48,6 +48,28 @@ export default function useRouter() {
         .catch((err: any) => console.log(err))
     }
 
+    const removeLiquidity = (
+        token0Address: string,
+        token1Address: string,
+        liquidity: string,
+        min0: string,
+        min1: string,
+        to: string | null | undefined,
+    ) => {
+        console.log(toWei(liquidity), toWei(min0), toWei(min1));
+        const data = Router.methods.removeLiquidity(
+            token0Address,
+            token1Address,
+            toWei(liquidity),
+            toWei(min0),
+            toWei(min1),
+            to,
+            Math.floor(Date.now() / 1000) + 60 * 10,
+        ).encodeABI();
+        metamaskTransaction(to, routerAddress, data);
+    }
+
+
     const swapTokenToToken = (
         amountIn: string,
         amountOutMin: string,
@@ -80,5 +102,6 @@ export default function useRouter() {
         addLiquidity,
         swapTokenToToken,
         getAmountOut,
+        removeLiquidity
     };
 }
