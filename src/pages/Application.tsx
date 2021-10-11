@@ -9,6 +9,7 @@ import AccountBar from "../components/AccountBar";
 import DevTools from "./DevTools";
 import Account from "./Account";
 import Tokens from "./Tokens";
+import Connect from "../components/Connect";
 
 export default function Application() {
 
@@ -33,9 +34,7 @@ export default function Application() {
 
                         :
 
-                        <Button onClick={
-                            connect
-                        }>Connect</Button>
+                        <Connect connect={connect}/>
                 }
 
             </div>
