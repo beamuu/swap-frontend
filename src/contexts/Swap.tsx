@@ -1,7 +1,9 @@
+import { useWeb3React } from "@web3-react/core";
 import { createContext, useEffect, useState } from "react";
 import useRouter from "../hooks/useRouter";
 import { Tokens } from "../utils/addresses";
 import { fromWei } from "../utils/convert";
+import { web3 } from "../wallet/providers/web3";
 
 const initContextValue = {
     token1: "TK1",
@@ -13,7 +15,8 @@ const initContextValue = {
     setToken1Amount: () => { },
     setToken2Amount: () => { },
     output: "",
-    calculated: false
+    calculated: false,
+    balance: ""
 }
 export interface ISwapContext {
     token1: string;
@@ -26,12 +29,16 @@ export interface ISwapContext {
     setToken2Amount: React.Dispatch<React.SetStateAction<number>> | (() => void);
     output: string;
     calculated: boolean;
+    balance: string;
 }
 
 export const SwapContext = createContext<ISwapContext>(initContextValue);
 
 
 export function SwapProvider({ children }: { children: any }) {
+
+    const { account } = useWeb3React();
+
     const [token1, setToken1] = useState<string>("TK1");
     const [token2, setToken2] = useState<string>("");
     const [token1Amount, setToken1Amount] = useState<number>(0);
@@ -42,6 +49,13 @@ export function SwapProvider({ children }: { children: any }) {
 
     // console.log(token1, token2);
 
+    const [balance, setBalance] = useState("");
+
+    const initBalance = async () => {
+        if (account) {
+            setBalance(parseFloat(fromWei(await web3.eth.getBalance(account))).toFixed(4).toString());
+        }
+    }
     const handleCalculateOutput = async () => {
         const a = await getAmountOut(
             token1Amount.toString(),
@@ -51,6 +65,11 @@ export function SwapProvider({ children }: { children: any }) {
         setToken2Amount(parseFloat(fromWei(a[1])));
 
     }
+
+
+    useEffect(() => {
+        initBalance();
+    }, [account])
 
     useEffect(() => {
         // console.log(token1, token1Amount, token2);
@@ -75,7 +94,8 @@ export function SwapProvider({ children }: { children: any }) {
             setToken1Amount,
             setToken2Amount,
             output,
-            calculated
+            calculated,
+            balance
         }}>
             {children}
         </SwapContext.Provider>

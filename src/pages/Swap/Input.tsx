@@ -21,8 +21,7 @@ export default function Input() {
                     </div>
                     <div className="col-3 p-0">
                         <select className="full-width swap" onChange={handleSelect}>
-                            <option value="TK1">TK1</option>
-                            <option value="TK2">TK2</option>
+                            <option value="BNB">BNB</option>
                         </select>
                     </div>
                 </div>

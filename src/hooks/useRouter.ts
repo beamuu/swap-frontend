@@ -6,13 +6,23 @@ import { toWei } from '../utils/convert';
 import { useWeb3React } from '@web3-react/core';
 import { metamaskTransaction } from './useTransaction';
 import { approve } from './useToken';
+import { useEffect, useState } from 'react';
 
 declare let window: any;
 
 export default function useRouter() {
 
     const { account } = useWeb3React();
+    const [WETH, setWETH] = useState();
     const Router = new web3.eth.Contract(routerData.abi as AbiItem[], routerAddress);
+
+    const initWETH = async () => {
+        setWETH(await Router.methods.WETH().call());
+    }
+
+    useEffect(() => {
+        initWETH();
+    }, [])
 
     const addLiquidity = (
         token0Address: string,
@@ -98,6 +108,7 @@ export default function useRouter() {
     }
 
     return {
+        WETH,
         Router,
         addLiquidity,
         swapTokenToToken,

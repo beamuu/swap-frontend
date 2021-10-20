@@ -19,9 +19,10 @@ const Button = styled.button`
 export default function SwapButton() {
 
     const { token1, token2, token1Amount, token2Amount } = useContext(SwapContext);
-    const { swapTokenToToken } = useRouter();
+    const { swapTokenToToken, WETH } = useRouter();
     const { account } = useWeb3React();
     
+    console.log(WETH);
 
     const handleSwapEvent = () => {
         if (window.confirm(`You will swap your ${token1Amount} ${token1} with ${token2Amount} ${token2},confirm transaction?`)) {
