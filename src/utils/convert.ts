@@ -9,3 +9,6 @@ export const fromWei = (_amount: string) => {
 export const stringHexToNumber = (_hexString: string) => {
     return parseInt(_hexString, 16);
 }
+export const toHex = (_amount: string) => {
+    return web3.utils.toHex(_amount);
+}

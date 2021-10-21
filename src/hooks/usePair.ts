@@ -41,7 +41,7 @@ export default function usePair(token1: string, token2: string) {
     }
     const approve = async (targetAddress: string, amount: string) => {
         const data = Pair.methods.approve(targetAddress, toWei(amount)).encodeABI();
-        return await metamaskTransaction(account, pairAddress, data);
+        return await metamaskTransaction(account, pairAddress, data, "0");
     }
     
 

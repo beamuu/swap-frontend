@@ -1,70 +1,70 @@
-export const factoryAddress = "0x545aff39B979acD12703D30E3758D8269CF7493F";
-export const token1Address = "0x9E9a42c61f364c734b3BecD7CD2Bf043AF4B0620";
-export const token2Address = "0x73D36D81499480bF9571feca2c2a4fBA430Cf19c";
-export const katradeAddress = "0xe481aecEA82232eba8D85A659FE0e249526285bF";
-export const lemonAddress = "0x123285265a4732F6b9AC654eD2a34506D2b5B0E4";
-export const goodgameAddress = "0xE2C5Ac6a34A9e203eE9656c9C2F0C467a4689D1B";
-export const tigraAddress = "0xB3E47Ead68f23fa5B4A2eB503EaA21aA2AaC7a3F";
+export const factoryAddress = "0xDE77e18f791c6F4BE9070E4202694D1cBe0ceC2D";
+export const token1Address = "0xd50180Ca4E01e8a64A6acD7A601E7F807c0d9d85";
+export const token2Address = "0x07836EfbD63772E9dE784A550FE4de3441e430B4";
+export const katradeAddress = "0x42dDd4347Ab8849bC81d4c3025A7de0585d5c890";
+export const lemonAddress = "0x0BF2739eE043E8d9e227929d3E81e4a6Da1961cb";
+export const goodgameAddress = "0xcFB940CA511799AF60d8cA3534A1467927080008";
+export const tigraAddress = "0xF39364835b9E7C11E834B6CFAFfA52ab168E3b28";
 
-export const routerAddress = "0x6Ad57748A3E8F22a944663bfEb8b8eB1b9132a93";
+export const wbnbAddress = "0x50a8911ef76835E4D9dE395398bF0E2D89bee26B";
 
-export const wbnbAddress = "0x094616f0bdfb0b526bd735bf66eca0ad254ca81f";
+export const routerAddress = "0x335996Fe6B1b99F9C6FF6CfEB08e152404C1E22c";
 
 
 export const Tokens: { [key: string]: { name: string, address: string}} = {
     "TK1": {
         "name": "Token1",
-        "address": "0x9E9a42c61f364c734b3BecD7CD2Bf043AF4B0620"
+        "address": "0xd50180Ca4E01e8a64A6acD7A601E7F807c0d9d85"
     },
     "TK2": {
         "name": "Token2",
-        "address": "0x73D36D81499480bF9571feca2c2a4fBA430Cf19c"
+        "address": "0x07836EfbD63772E9dE784A550FE4de3441e430B4"
     },
     "KTD": {
         "name": "Katrade",
-        "address": "0xe481aecEA82232eba8D85A659FE0e249526285bF"
+        "address": "0x42dDd4347Ab8849bC81d4c3025A7de0585d5c890"
     },
     "LEMON": {
         "name": "LemonCoin",
-        "address": "0x123285265a4732F6b9AC654eD2a34506D2b5B0E4"
+        "address": "0x0BF2739eE043E8d9e227929d3E81e4a6Da1961cb"
     },
     "GG": {
         "name": "GoodGame",
-        "address": "0xE2C5Ac6a34A9e203eE9656c9C2F0C467a4689D1B"
+        "address": "0xcFB940CA511799AF60d8cA3534A1467927080008"
     },
     "TIG": {
         "name": "TIGRA",
-        "address": "0xB3E47Ead68f23fa5B4A2eB503EaA21aA2AaC7a3F"
+        "address": "0xF39364835b9E7C11E834B6CFAFfA52ab168E3b28"
     },
 }
 
 export const TokenOfAddress: { [key: string]: { name: string, symbol: string, icon: string}} = {
-    "0x9E9a42c61f364c734b3BecD7CD2Bf043AF4B0620": {
+    "0xd50180Ca4E01e8a64A6acD7A601E7F807c0d9d85": {
         "name": "Token1",
         "symbol": "TK1",
         "icon": "",
     },
-    "0x73D36D81499480bF9571feca2c2a4fBA430Cf19c": {
+    "0x07836EfbD63772E9dE784A550FE4de3441e430B4": {
         "name": "Token2",
         "symbol": "TK2",
         "icon": "",
     },
-    "0xe481aecEA82232eba8D85A659FE0e249526285bF": {
+    "0x42dDd4347Ab8849bC81d4c3025A7de0585d5c890": {
         "name": "Katrade",
         "symbol": "KTD",
         "icon": "https://i1.wp.com/www.youthyear.org/wp-content/uploads/2016/09/mint-green-background.jpg?fit=1200%2C887&ssl=1&w=640",
     },
-    "0x123285265a4732F6b9AC654eD2a34506D2b5B0E4": {
+    "0x0BF2739eE043E8d9e227929d3E81e4a6Da1961cb": {
         "name": "LemonCoin",
         "symbol": "LEMON",
         "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYsA3einMBqtVqApENbhx1vM4vl-dynyoypA&usqp=CAU",
     },
-    "0xE2C5Ac6a34A9e203eE9656c9C2F0C467a4689D1B": {
+    "0xcFB940CA511799AF60d8cA3534A1467927080008": {
         "name": "GoodGame",
         "symbol": "GG",
         "icon": "https://t3.ftcdn.net/jpg/03/24/46/72/360_F_324467283_97K5JaR0Ko8BYjuzS3UlpGgVTilVw0Iv.jpg",
     },
-    "0xB3E47Ead68f23fa5B4A2eB503EaA21aA2AaC7a3F": {
+    "0xF39364835b9E7C11E834B6CFAFfA52ab168E3b28": {
         "name": "TIGRA",
         "symbol": "TIG",
         "icon": "https://static.wikia.nocookie.net/symbolism/images/4/43/Orange.png/revision/latest/scale-to-width-down/400?cb=20140818120046",

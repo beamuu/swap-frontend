@@ -16,7 +16,7 @@ export default function useToken(tokenAddress: string) {
 
     const approve = async (targetAddress: string, amount: string) => {
         const data = Token.methods.approve(targetAddress, toWei(amount)).encodeABI();
-        return await metamaskTransaction(account, tokenAddress, data);
+        return await metamaskTransaction(account, tokenAddress, data, "0");
     }
     const balanceOf = async () => {
         return await Token.methods.balanceOf(account).call();
@@ -41,5 +41,5 @@ export default function useToken(tokenAddress: string) {
 
 export const approve = (token: string, me: string | null | undefined, target: string, amount: string) => {
     const data = Token.methods.approve(target, toWei(amount)).encodeABI();
-    metamaskTransaction(me, token, data);
+    metamaskTransaction(me, token, data, "0");
 }

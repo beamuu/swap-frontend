@@ -17,6 +17,7 @@ export default function useRouter() {
     const Router = new web3.eth.Contract(routerData.abi as AbiItem[], routerAddress);
 
     const initWETH = async () => {
+        console.log(await Router.methods.WETH().call());
         setWETH(await Router.methods.WETH().call());
     }
 
@@ -76,7 +77,7 @@ export default function useRouter() {
             to,
             Math.floor(Date.now() / 1000) + 60 * 10,
         ).encodeABI();
-        metamaskTransaction(to, routerAddress, data);
+        metamaskTransaction(to, routerAddress, data, "");
     }
 
 
@@ -94,7 +95,7 @@ export default function useRouter() {
             Math.floor(Date.now() / 1000) + 60 * 10
         ).encodeABI();
         approve(path[0], account, routerAddress, toWei(amountIn));
-        metamaskTransaction(account, routerAddress, data);
+        metamaskTransaction(account, routerAddress, data, "0");
     }
 
     const getAmountOut = async (

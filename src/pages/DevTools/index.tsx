@@ -3,8 +3,9 @@ import { TiSocialGithubCircular } from "react-icons/ti";
 import { Button } from "../../components/Button";
 import useToken from "../../hooks/useToken";
 import { metamaskTransaction } from "../../hooks/useTransaction";
-import { goodgameAddress, katradeAddress, lemonAddress, routerAddress, tigraAddress, token1Address, token2Address } from "../../utils/addresses";
-import { toWei } from "../../utils/convert";
+import useWBNB from "../../hooks/useWBNB";
+import { goodgameAddress, katradeAddress, lemonAddress, routerAddress, tigraAddress, token1Address, token2Address, wbnbAddress } from "../../utils/addresses";
+import { fromWei, toWei } from "../../utils/convert";
 
 declare let window: any;
 
@@ -16,6 +17,7 @@ export default function DevTools() {
     const { Token: LEMON } = useToken(lemonAddress);
     const { Token: GG } = useToken(goodgameAddress);
     const { Token: TIG } = useToken(tigraAddress);
+    const WBNB = useWBNB(wbnbAddress);
     const { account } = useWeb3React();
 
     async function getBalanceOfToken1(address: string | null | undefined) {
@@ -67,6 +69,16 @@ export default function DevTools() {
         const txhash = await metamaskTransaction(account, tigraAddress, encodedABI, "");
         return alert(`minted 10 TIG, transaction hash is ${txhash}`);
     }
+    
+    async function wrapBNB() {
+        const encodedABI = WBNB.methods.deposit().encodeABI();
+        const txhash = await metamaskTransaction(account, wbnbAddress, encodedABI, "0.1");
+        alert(txhash);
+    }
+
+    async function wbnbBalance() {
+        alert(fromWei(await WBNB.methods.balanceOf(account).call()));
+    } 
 
     return (
         <div>
@@ -84,6 +96,9 @@ export default function DevTools() {
                 <Button onClick={() => mintLEMON()}>mint LEMON</Button>
                 <Button onClick={() => mintGG()}>mint GG</Button>
                 <Button onClick={() => mintTIG()}>mint TIG</Button>
+
+                <Button onClick={() => wrapBNB()}>Wrap 10 BNB</Button>
+                <Button onClick={() => wbnbBalance()}>Balance of WBNB</Button>
 
                 {/* <Button>approve TK1 (router)</Button> */}
                 {/* <Button>approve TK2 (router)</Button> */}
