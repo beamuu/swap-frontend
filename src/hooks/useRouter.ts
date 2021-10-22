@@ -5,7 +5,7 @@ import { routerAddress } from '../utils/addresses';
 import { toWei } from '../utils/convert';
 import { useWeb3React } from '@web3-react/core';
 import { metamaskTransaction } from './useTransaction';
-import { approve } from './useToken';
+import { approve, isRouterApprovedToken } from './useToken';
 import { useEffect, useState } from 'react';
 
 declare let window: any;
@@ -94,18 +94,42 @@ export default function useRouter() {
             to,
             Math.floor(Date.now() / 1000) + 60 * 10
         ).encodeABI();
-        approve(path[0], account, routerAddress, toWei(amountIn));
-        metamaskTransaction(account, routerAddress, data, "0");
+        // approve(path[0], account, routerAddress, toWei(amountIn));
+        isRouterApprovedToken(account, path[0]).then(
+            () => metamaskTransaction(account, routerAddress, data, "0")
+        )
+        
+    }
+
+    const swapBNBToToken = (
+        amountIn: string,
+        amountOutMin: string,
+        path: string[],
+        to: string | null | undefined,
+    ) => {
+        const data = Router.methods.swapExactETHForTokens(
+            toWei(amountOutMin),
+            path,
+            to,
+            Math.floor(Date.now() / 1000) + 60 * 10
+        ).encodeABI();
+        // approve(path[0], account, routerAddress, toWei(amountIn));
+        isRouterApprovedToken(account, path[0]).then(
+            () => metamaskTransaction(account, routerAddress, data, amountIn)
+        )
+        
     }
 
     const getAmountOut = async (
         amountIn: string,
         path: string[],
     ) => {
+        console.log(amountIn);
+        console.log(path);
         return await Router.methods.getAmountsOut(
             toWei(amountIn),
             path
-        ).call();
+        ).call().catch((err: any) => console.log(err));
     }
 
     return {
@@ -114,6 +138,7 @@ export default function useRouter() {
         addLiquidity,
         swapTokenToToken,
         getAmountOut,
-        removeLiquidity
+        removeLiquidity,
+        swapBNBToToken
     };
 }

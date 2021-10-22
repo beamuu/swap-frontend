@@ -1,3 +1,5 @@
+import BigNumber from "bignumber.js";
+import BN from "bn.js";
 import { web3 } from "../wallet/providers/web3"
 
 export const toWei = (_amount: string) => {

@@ -25,8 +25,6 @@ export default function Output() {
                     <div className="col-3 p-0">
                         <select className="full-width swap" onChange={handleSelect} id="select-output">
                             <option disabled={token2 ? true : false} value="" id="reset">Choose</option>
-                            <option value="TK1">TK1</option>
-                            <option value="TK2">TK2</option>
                             <option value="LEMON">LEMON</option>
                             <option value="KTD">KTD</option>
                             <option value="GG">GG</option>

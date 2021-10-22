@@ -36,9 +36,23 @@ export const Tokens: { [key: string]: { name: string, address: string}} = {
         "name": "TIGRA",
         "address": "0xF39364835b9E7C11E834B6CFAFfA52ab168E3b28"
     },
+    "WBNB": {
+        "name": "Wrapped BNB",
+        "address": "0x50a8911ef76835E4D9dE395398bF0E2D89bee26B"
+    },
+    "BNB": {
+        "name": "BNB",
+        "address": "0x50a8911ef76835E4D9dE395398bF0E2D89bee26B"
+    },
+    
 }
 
 export const TokenOfAddress: { [key: string]: { name: string, symbol: string, icon: string}} = {
+    "0x50a8911ef76835E4D9dE395398bF0E2D89bee26B": {
+        "name": "Wrapped BNB",
+        "symbol": "WBNB",
+        "icon": "",
+    },
     "0xd50180Ca4E01e8a64A6acD7A601E7F807c0d9d85": {
         "name": "Token1",
         "symbol": "TK1",

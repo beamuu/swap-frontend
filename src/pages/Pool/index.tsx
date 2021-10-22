@@ -11,14 +11,14 @@ export default function Pool() {
             <h5>Liquidity pools</h5>
             <div className="mt-3 d-flex flex-wrap">
                 <PoolIcon 
-                    token1="TK1" 
-                    token2="TK2"
-                    address="0x27835abf87e682d187e871871fA98764" // MOCK
+                    token1="WBNB" 
+                    token2="LEMON"
+                    address="0x427c8f51a2598082a5B61213e293a8474C08150E"
                     abi={[]}
-                    onClick={() => history.push("/pool/TK1-TK2")}
+                    onClick={() => history.push("/pool/WBNB-LEMON")}
                     
                     />
-                <PoolIcon 
+                {/* <PoolIcon 
                     token1="KTD" 
                     token2="LEMON"
                     address="0x27835abf87e682d187e871871fA98764" // MOCK
@@ -41,7 +41,7 @@ export default function Pool() {
                     abi={[]}
                     onClick={() => history.push("/pool/KTD-GG")}
                     
-                    />
+                    /> */}
 
             </div>
         </div>

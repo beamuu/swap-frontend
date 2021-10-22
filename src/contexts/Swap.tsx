@@ -39,7 +39,7 @@ export function SwapProvider({ children }: { children: any }) {
 
     const { account } = useWeb3React();
 
-    const [token1, setToken1] = useState<string>("TK1");
+    const [token1, setToken1] = useState<string>("BNB");
     const [token2, setToken2] = useState<string>("");
     const [token1Amount, setToken1Amount] = useState<number>(0);
     const [token2Amount, setToken2Amount] = useState<number>(0);
@@ -57,6 +57,9 @@ export function SwapProvider({ children }: { children: any }) {
         }
     }
     const handleCalculateOutput = async () => {
+        if (token1Amount <= 0) {
+            return;
+        }
         const a = await getAmountOut(
             token1Amount.toString(),
             [Tokens[token1].address, Tokens[token2].address]

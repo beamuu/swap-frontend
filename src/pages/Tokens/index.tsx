@@ -6,8 +6,8 @@ export default function Tokens() {
         <div>
             <h5 className="mb-3">Our Official Tokens</h5>
             <div className="d-flex flex-wrap">
-                <TokenBox address={token1Address}/>
-                <TokenBox address={token2Address}/>
+                {/* <TokenBox address={token1Address}/>
+                <TokenBox address={token2Address}/> */}
                 <TokenBox address={katradeAddress}/>
                 <TokenBox address={lemonAddress}/>
                 <TokenBox address={goodgameAddress}/>
