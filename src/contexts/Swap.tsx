@@ -1,6 +1,7 @@
 import { useWeb3React } from "@web3-react/core";
 import { createContext, useEffect, useState } from "react";
 import useRouter from "../hooks/useRouter";
+import useToken from "../hooks/useToken";
 import { Tokens } from "../utils/addresses";
 import { fromWei } from "../utils/convert";
 import { web3 } from "../wallet/providers/web3";
@@ -46,6 +47,7 @@ export function SwapProvider({ children }: { children: any }) {
     const [output, setOutput] = useState<string>("");
     const [calculated, setCalculated] = useState(false);
     const { getAmountOut } = useRouter();
+    const { Token } = useToken("");
 
     // console.log(token1, token2);
 
@@ -53,7 +55,13 @@ export function SwapProvider({ children }: { children: any }) {
 
     const initBalance = async () => {
         if (account) {
-            setBalance(parseFloat(fromWei(await web3.eth.getBalance(account))).toFixed(4).toString());
+            if (token1 !== "BNB") {
+                Token.options.address = Tokens[token1].address;
+                setBalance(parseFloat(fromWei(await Token.methods.balanceOf(account).call())).toFixed(4).toString());
+            }
+            else {
+                setBalance(parseFloat(fromWei(await web3.eth.getBalance(account))).toFixed(4).toString());
+            }
         }
     }
     const handleCalculateOutput = async () => {
@@ -72,7 +80,7 @@ export function SwapProvider({ children }: { children: any }) {
 
     useEffect(() => {
         initBalance();
-    }, [account])
+    }, [account, token1])
 
     useEffect(() => {
         // console.log(token1, token1Amount, token2);

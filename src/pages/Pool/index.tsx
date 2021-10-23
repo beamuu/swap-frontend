@@ -18,30 +18,30 @@ export default function Pool() {
                     onClick={() => history.push("/pool/WBNB-LEMON")}
                     
                     />
-                {/* <PoolIcon 
-                    token1="KTD" 
-                    token2="LEMON"
+                <PoolIcon 
+                    token1="WBNB" 
+                    token2="KTD"
                     address="0x27835abf87e682d187e871871fA98764" // MOCK
                     abi={[]}
-                    onClick={() => history.push("/pool/KTD-LEMON")}
+                    onClick={() => history.push("/pool/WBNB-KTD")}
                     
                     />
                 <PoolIcon 
-                    token1="TIG" 
-                    token2="LEMON"
+                    token1="WBNB" 
+                    token2="TIG"
                     address="0x27835abf87e682d187e871871fA98764" // MOCK
                     abi={[]}
-                    onClick={() => history.push("/pool/TIG-LEMON")}
+                    onClick={() => history.push("/pool/WBNB-TIG")}
                     
                     />
                 <PoolIcon 
-                    token1="KTD" 
+                    token1="WBNB" 
                     token2="GG"
                     address="0x27835abf87e682d187e871871fA98764" // MOCK
                     abi={[]}
-                    onClick={() => history.push("/pool/KTD-GG")}
+                    onClick={() => history.push("/pool/WBNB-GG")}
                     
-                    /> */}
+                    />
 
             </div>
         </div>

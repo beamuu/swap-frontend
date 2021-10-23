@@ -16,7 +16,12 @@ const Head = styled.div`
 `
 
 export default function Main() {
+
     const history = useHistory()
+
+    const toGithub = () => {
+        window.location.href = "https://github.com/nutchanonc/swap-frontend";
+    }
     return (
         <Background>
             <Head>
@@ -31,7 +36,7 @@ export default function Main() {
                                 <p className="text-white mb-4">Welcome to Nutchanon's DEX. This is just my playground. None of the tokens are valuable.</p>
                                 <div className="d-flex">
                                     <Button color={blue} backgroundColor="#fff" onClick={() => history.push("/app")}>Trade now</Button>
-                                    <Button color="#000" backgroundColor="#fff" onClick={() => history.push("/app")}><AiFillGithub className="me-1" size="22px" />Github</Button>
+                                    <Button color="#000" backgroundColor="#fff" onClick={() => toGithub()}><AiFillGithub className="me-1" size="22px" />Github</Button>
                                 </div>
                             </div>
                         </div>
