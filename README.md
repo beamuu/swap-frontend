@@ -30,3 +30,8 @@ This project contains 3 parts
 - Choose your input currency, output currency and enter the input amount you want to trade.
 - It should show the estimate amount that you will get if their is a sufficient amount of tokens in the liquidity pool.
 - press swap!
+
+### App's screenshots
+![Trading](https://github.com/nutchanonc/swap-frontend/blob/main/screenshots/Screen%20Shot%202564-10-24%20at%2013.38.18.png)
+![Pools](https://github.com/nutchanonc/swap-frontend/blob/main/screenshots/Screen%20Shot%202564-10-24%20at%2013.38.33.png)
+![Tokens](https://github.com/nutchanonc/swap-frontend/blob/main/screenshots/Screen%20Shot%202564-10-24%20at%2013.38.46.png)
