@@ -6,24 +6,27 @@ interface IConnect {
 
 export default function Connect({ connect }: IConnect) {
     return (
-        <div 
+        <div
             style={{
                 width: "100%",
-                height: "100%",
+                height: "100%"
             }}
             className="d-flex justify-content-center align-items-center"
-            >
-                <div className="container" style={{ height: "60%"}}>
-                    <div className="row m-0" style={{ height: "100%"}}>
-                        <div className="col-lg d-flex align-items-center">
+        >
+            <div className="container" style={{ height: "60%" }}>
+                <div className="row m-0" style={{ height: "100%" }}>
+                    <div className="col-lg d-flex align-items-center justify-content-center">
+                        <div>
                             <CustomButton onClick={connect}>Connect Your Wallet {">"}</CustomButton>
+                            <p className="mt-4">Maske sure that you have install MateMask on your Google Chrome Extensions. If not, <a href="https://metamask.io/download" target="_blank">install here</a>.</p>
                         </div>
-                        <div className="col-lg">
-                            <img src="https://images.theconversation.com/files/350865/original/file-20200803-24-50u91u.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop" width="100%"/>
-                        </div>
-                        
                     </div>
+                    <div className="col-lg d-flex justify-content-center align-items-center">
+                        <img src="https://cdn.dribbble.com/users/2574702/screenshots/6702374/metamask.gif" height="500px" />                    
+                    </div>
+
                 </div>
+            </div>
         </div>
     )
 }

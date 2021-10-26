@@ -25,7 +25,7 @@ export default function Application() {
     }
     console.log(account)
     return (
-        <div className="d-flex justify-content-center align-items-center" style={{ width: "100vw", height: "100vh" }}>
+        <div className="d-flex justify-content-center align-items-center" style={{ width: "100vw", height: "100vh", background: active ? "" : "#fff"}}>
             <div style={{ width: "87vw", height: "100vh", maxWidth: "2000px" }}>
                 {
                     active ?
